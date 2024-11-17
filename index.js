@@ -3,10 +3,21 @@ import dotenv from "dotenv";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from "cors";
+import mongoose from "mongoose";
 
 // Load environment variables
 dotenv.config();
 const app = express();
+
+// Connect to MongoDB
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.log("Failed to connect to MongoDB", err);
+  });
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
