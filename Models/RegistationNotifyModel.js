@@ -1,24 +1,34 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
 const RegistationNotifySchema = new Schema(
-    {
+  {
+    email: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    message: {
+      type: String,
+      required: true,
+    },
 
-    email:{
-        type: String,
-        required: true,
+    date: {
+      type: String,
+      default: () => new Date(),
+      required: true,
     },
-    name:{
-        type: String,
-        required: true,
+    time: {
+      type: String,
+      default: () => new Date().toLocaleTimeString(),
+      required: true,
     },
-    message:{
-        type: String,
-        required: true,
-    },
-    },
-    { timestamps: true }
+  },
+  { timestamps: true }
 );
 
-export default mongoose.model('RegistationNotify', RegistationNotifySchema);
+export default mongoose.model("RegistationNotify", RegistationNotifySchema);
