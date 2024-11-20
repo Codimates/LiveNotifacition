@@ -1,11 +1,21 @@
+import RegistationNotify from "../Models/RegistationNotifyModel.js";
+
 const registrenotify = (socket) => {
   socket.on("register", async (data) => {
-    console.log("Registration data received:", data);
+    const { fname, email } = data;
+
     try {
-      console.log("Saving user data to database...");
+      const message = ` ${fname}, User have successfully registered ${email}! `;
+      const registrationData = new RegistationNotify({
+        email,
+        name: fname,
+        message,
+      });
+
+      await registrationData.save();
 
       socket.emit("registerSuccess", {
-        message: "User registered successfully!",
+        message: `${fname} registered successfully!`,
       });
     } catch (error) {
       socket.emit("registerError", { message: error.message });
