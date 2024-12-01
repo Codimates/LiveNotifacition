@@ -22,6 +22,10 @@ const RegistationNotifySchema = new Schema(
       default: () => new Date(),
       required: true,
     },
+    viewed: {
+      type: [String], 
+      default: [], 
+    },
     time: {
       type: String,
       default: () => new Date().toLocaleTimeString(),

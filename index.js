@@ -4,7 +4,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import mongoose from "mongoose";
-import {registrenotify , getnotifacition} from "./sockethandler/RegisterNotify.js";
+import {registrenotify , getnotifacition ,getviewedsignal} from "./sockethandler/RegisterNotify.js";
 
 // Load environment variables
 dotenv.config();
@@ -33,6 +33,7 @@ io.on("connection", (socket) => {
 
   registrenotify(socket);
   getnotifacition(io);
+  getviewedsignal(socket);
   
   socket.on("disconnect", () => {
     // console.log("A user disconnected");
