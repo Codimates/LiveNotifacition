@@ -60,13 +60,13 @@ const getnotifacition = (io) => {
   io.on("connection", (socket) => {
     socket.on("Registernotifyget", async (data) => {
       try {
-        // const { email } = data; // Extract email from client payload
+        const { email } = data; // Extract email from client payload
 
-        const notifications = await RegistationNotify.find();
+        // const notifications = await RegistationNotify.find();
 
-        // const notifications = await RegistationNotify.find({
-        //   viewed: { $ne: email }, // Exclude notifications where the email exists in the 'viewed' array
-        // });
+        const notifications = await RegistationNotify.find({
+          viewed: { $ne: email }, // Exclude notifications where the email exists in the 'viewed' array
+        });
 
         socket.emit("getNotifications", { notifications });
       } catch (error) {
